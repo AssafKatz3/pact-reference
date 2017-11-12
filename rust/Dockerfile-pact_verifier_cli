@@ -1,9 +1,9 @@
 FROM ekidd/rust-musl-builder AS builder
 
 # Add our source code.
-ADD . /home/rust/src/
+ADD * ./
 
-RUN cargo clean
+RUN cd pact_verifier_cli && cargo clean
 
 # Fix permissions on source code.
 RUN sudo chown -R rust:rust /home/rust
