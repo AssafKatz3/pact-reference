@@ -1,11 +1,11 @@
 FROM ekidd/rust-musl-builder AS builder
 
 # Add our source code.
-Copy * ./
+ADD . /home/rust/src/
 
-RUN ls
+RUN pwd && ls
 
-RUN cargo clean
+RUN cd pact_verifier_cli && cargo clean
 
 # Fix permissions on source code.
 RUN sudo chown -R rust:rust /home/rust
@@ -15,7 +15,7 @@ RUN sed -i -e 's/pact_matching = {\s*version\s*=\s*"\([^"]*\).*/pact_matching = 
 RUN sed -i -e 's/pact_verifier = {\s*version\s*=\s*"\([^"]*\).*/pact_verifier = "\1"/' */Cargo.toml
 
 # Build our application.
-RUN cargo build --release
+RUN cd pact_verifier_cli && cargo build --release
 
 # Now, we need to build our _real_ Docker container, copying in the executable.
 FROM alpine:latest
