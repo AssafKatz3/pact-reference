@@ -11,6 +11,7 @@ RUN sudo chown -R rust:rust /home/rust
 # Build our application.
 RUN cargo build --release
 
+
 # Now, we need to build our _real_ Docker container, copying in the executable.
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
