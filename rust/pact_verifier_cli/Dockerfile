@@ -1,7 +1,7 @@
 FROM ekidd/rust-musl-builder AS builder
 
 # Add our source code.
-ADD . ./
+ADD . /home/rust/src/
 
 RUN cargo clean
 
